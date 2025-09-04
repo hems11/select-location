@@ -23,21 +23,29 @@ const StateSelector = () => {
 
     const fetchStateList = async (selectedCountry) => {
         try{
-            const response = await fetch(`https://crio-location-selector.onrender.com/country=${selectedCountry}/states`);
-            const data = await response.json();
-            setStateList(data);
-            console.log("states",data);
+            if(selectedCountry){
+                const response = await fetch(`https://crio-location-selector.onrender.com/country=${selectedCountry}/states`);
+                const data = await response.json();
+                setStateList(data);
+                setSelectedState("");
+                setCityList([]);
+                setSelectedCity("");
+                console.log("states",data);
+            }
         }catch(error){
-            console.error("Error fetching states:", error);
+                console.error("Error fetching states:", error);
         }
     }
 
     const fetchCityList = async (selectedCountry, selectedState) => {
         try{
-            const response = await fetch(`https://crio-location-selector.onrender.com/country=${selectedCountry}/state=${selectedState}/cities`);
-            const data = await response.json();
-            setCityList(data);
-            console.log("cities",data);
+            if(selectedCountry && selectedState){
+                const response = await fetch(`https://crio-location-selector.onrender.com/country=${selectedCountry}/state=${selectedState}/cities`);
+                const data = await response.json();
+                setCityList(data);
+                setSelectedCity("");
+                console.log("cities",data);
+            }
         }catch(error){
             console.error("Error fetching city:", error);
         }
@@ -89,11 +97,9 @@ const StateSelector = () => {
         </select>
         
         {selectedCity &&
-        // <p style={{ marginTop: "20px", fontWeight: "bold" }}>
-        //   You selected {selectedCity}, {selectedState}, {selectedCountry}
-        // </p>
-        // "You selected City, State, Country”:
-            <p>You selected <span style={{fontSize:"30px"}}>{selectedCity}</span>, <span style={{color:"gray"}}>{selectedState},{selectedCountry}:</span></p>
+            <h2>You selected <span style={{fontSize:"30px"}}>{selectedCity}</span>, 
+                <span style={{color:"gray"}}>{" "}{selectedState}, {selectedCountry}</span>
+            </h2>
         }
     </>
     )
