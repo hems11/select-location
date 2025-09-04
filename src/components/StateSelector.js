@@ -89,7 +89,11 @@ const StateSelector = () => {
         </select>
         
         {selectedCity &&
-            <h3>You selected <span style={{fontSize:"30px"}}>{selectedCity}</span>, <span style={{color:"gray"}}>{selectedState},{selectedCountry}</span></h3>
+        // <p style={{ marginTop: "20px", fontWeight: "bold" }}>
+        //   You selected {selectedCity}, {selectedState}, {selectedCountry}
+        // </p>
+        // "You selected City, State, Country”:
+            <p>You selected <span style={{fontSize:"30px"}}>{selectedCity}</span>, <span style={{color:"gray"}}>{selectedState},{selectedCountry}:</span></p>
         }
     </>
     )
